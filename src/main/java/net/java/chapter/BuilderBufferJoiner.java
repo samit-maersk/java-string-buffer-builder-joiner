@@ -1,19 +1,22 @@
 package net.java.chapter;
 
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Demo {
+public class BuilderBufferJoiner {
     public static void main(String[] args) {
         //stringBuilderExample();
-        //stringBufferExample();
+        stringBufferExample();
 
-        //stringBufferTimeAndMemory();
-        //stringBuilderTimeAndMemory();
-        stringJoinerExample();
+//        stringBufferTimeAndMemory();
+//        stringBuilderTimeAndMemory();
+        //stringJoinerExample();
 
     }
 
@@ -72,40 +75,28 @@ public class Demo {
     static void stringBuilderTimeAndMemory() {
         System.gc();
         long start=new GregorianCalendar().getTimeInMillis();
-        long startMemory=Runtime.getRuntime().freeMemory();
         StringBuilder sb = new StringBuilder();
         Set s = new HashSet();
-        IntStream.range(1,10000000).parallel().forEach(x -> {
-            s.add(Thread.currentThread().getName());
-            sb.append(",").append(x);
-        });
-
+        IntStream.range(1,10000000).parallel().forEach(x -> sb.append(",").append(x));
         long end=new GregorianCalendar().getTimeInMillis();
-        long endMemory=Runtime.getRuntime().freeMemory();
         System.out.println("(StringBuilder) Time Taken:"+(end-start));
-        System.out.println("(StringBuilder) Memory used:"+(startMemory-endMemory));
-        System.out.println("(StringBuilder) Number Of Thread :"+s.size());
     }
 
     static void stringBufferTimeAndMemory() {
         System.gc();
         long start=new GregorianCalendar().getTimeInMillis();
-        long startMemory=Runtime.getRuntime().freeMemory();
         StringBuffer sb = new StringBuffer();
-        Set s = new HashSet();
-        IntStream.range(1,10000000).parallel().forEach(x -> {
-            s.add(Thread.currentThread().getName());
-            sb.append(",").append(x);
-        });
+        var tCount = new HashSet();
+        IntStream.range(1,10000000).parallel().forEach(x -> sb.append(",").append(x));
         long end=new GregorianCalendar().getTimeInMillis();
-        long endMemory=Runtime.getRuntime().freeMemory();
         System.out.println("(StringBuffer) Time Taken:"+(end-start));
-        System.out.println("(StringBuffer) Memory used:"+(startMemory-endMemory));
-        System.out.println("(StringBuffer) Number Of Thread :"+s.size());
+
     }
 
     static void stringJoinerExample() {
-        //StringJoiner is a class in Java that is used to join multiple strings together into a single string. It was introduced in Java 8 as part of the java.util package.
+        // StringJoiner is a class used to construct a sequence of characters separated by a delimiter and optionally starting with a supplied prefix and ending with a supplied suffix.
+        // It was introduced in Java 8 as part of the java.util package.
+
         StringJoiner joiner = new StringJoiner(", ");
         joiner.add("apple");
         joiner.add("banana");
@@ -130,5 +121,16 @@ public class Demo {
         joiner02.add("mango");
         joiner01.merge(joiner02);
         System.out.println(joiner01.toString()); // "apple, banana, orange, mango"
+
+        StringJoiner sj = new StringJoiner(":", "[", "]");
+        sj.add("George").add("Sally").add("Fred");
+        System.out.println(sj.toString());
+        /*
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+        String commaSeparatedNumbers = numbers.stream()
+                .map(i -> i.toString())
+                .collect(Collectors.joining(", "));
+
+         */
     }
 }
