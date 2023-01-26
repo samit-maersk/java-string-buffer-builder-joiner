@@ -9,11 +9,6 @@ public class StringMethods {
     //https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html
     public static void main(String[] args) {
 
-        /*Java 1.1*/
-        //toUpperCase(Locale locale) - which returns a new string in which all the characters in the string are in upper case, using the given locale's rules
-        String s8 = "istanbul";
-        System.out.println(s8.toUpperCase(Locale.ENGLISH)); // ISTANBUL
-        System.out.println(s8.toUpperCase(new Locale("tr","TR"))); //İSTANBUL (in Turkish)
 
         /*Java 1.5*/
 
@@ -139,8 +134,20 @@ public class StringMethods {
         //stripIndent()- which removes the common leading white space from every line in the string.
         String s7 = " line1\n line2\n line3";
         System.out.println(s7.stripIndent());
+        /*
+        line1
+        line2
+        line3
+        */
+
 
         /* Java 17 */
+
+        /*Java 1.1*/
+        //toUpperCase(Locale locale) - which returns a new string in which all the characters in the string are in upper case, using the given locale's rules
+        String s8 = "istanbul";
+        System.out.println(s8.toUpperCase(Locale.ENGLISH)); // ISTANBUL
+        System.out.println(s8.toUpperCase(new Locale("tr","TR"))); //İSTANBUL (in Turkish)
 
     }
 }

@@ -1,82 +1,78 @@
 package net.java.chapter;
 
-import java.util.Arrays;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BuilderBufferJoiner {
     public static void main(String[] args) {
-        //stringBuilderExample();
-        stringBufferExample();
+//        stringBuilderExample();
+//        stringBufferExample();
 
 //        stringBufferTimeAndMemory();
 //        stringBuilderTimeAndMemory();
-        //stringJoinerExample();
+
+//        stringJoinerExample();
 
     }
 
     static void stringBuilderExample() {
         /*
-        StringBuilder class is used to create mutable (modifiable) strings. This means that a StringBuilder object can be modified after it is created, unlike a String object which is immutable.
-        StringBuilder is a part of the Java Standard Library and it is present in the java.lang package
+        StringBuilder class is used to create mutable (modifiable) strings.
+        This means that a StringBuilder object can be modified after it is created, unlike a String object which is immutable.
+        StringBuilder is from java.lang package
         It is a direct alternative to StringBuffer class with the difference being that StringBuffer is thread-safe and StringBuilder is not.
         */
         StringBuilder stringBuilder = new StringBuilder("Hello ");
         stringBuilder.append("world!");
-        System.out.println(stringBuilder);
+        System.out.println(stringBuilder);  //Hello world!
 
         StringBuilder stringBuilder1 = new StringBuilder("Hello ");
         stringBuilder1.append("world!");
-        stringBuilder1.reverse();
+        stringBuilder1.reverse(); //!dlrow olleH
         System.out.println(stringBuilder1);
 
         StringBuilder stringBuilder2 = new StringBuilder("Hello ");
         stringBuilder2.append("world!");
         stringBuilder2.insert(1,"INSERT");
-        System.out.println(stringBuilder2);
+        System.out.println(stringBuilder2); //HINSERTello world!
 
         StringBuilder stringBuilder3 = new StringBuilder("Hello ");
         stringBuilder3.append("world!");
         stringBuilder3.replace(1,3,"REPLACE");
-        System.out.println(stringBuilder);
+        System.out.println(stringBuilder3); //HREPLACElo world!
     }
 
     static void stringBufferExample() {
         //StringBuffer
-        //In Java, the StringBuffer class is used to create mutable (modifiable) strings.
+        // In Java, the StringBuffer class is used to create mutable (modifiable) strings.
         // It is similar to the StringBuilder class, but with the difference that StringBuffer is thread-safe, while StringBuilder is not.
         // StringBuffer is a part of the Java Standard Library and it is present in the java.lang package.
 
         StringBuffer stringBuffer = new StringBuffer("Hello ");
         stringBuffer.append("world!");
-        System.out.println(stringBuffer);
+        System.out.println(stringBuffer); //Hello world!
 
         StringBuffer stringBuffer1 = new StringBuffer("Hello ");
         stringBuffer1.append("world!");
         stringBuffer1.insert(3,"INSERT");
-        System.out.println(stringBuffer1);
+        System.out.println(stringBuffer1); //HelINSERTlo world!
 
         StringBuffer stringBuffer2 = new StringBuffer("Hello ");
         stringBuffer2.append("world!");
         stringBuffer2.replace(1,3,"REPLACE");
-        System.out.println(stringBuffer2);
+        System.out.println(stringBuffer2); //HREPLACElo world!
 
         StringBuffer stringBuffer3 = new StringBuffer("Hello ");
         stringBuffer3.append("world!");
         stringBuffer3.reverse();
-        System.out.println(stringBuffer3);
+        System.out.println(stringBuffer3); //!dlrow olleH
     }
 
     static void stringBuilderTimeAndMemory() {
         System.gc();
         long start=new GregorianCalendar().getTimeInMillis();
         StringBuilder sb = new StringBuilder();
-        Set s = new HashSet();
         IntStream.range(1,10000000).parallel().forEach(x -> sb.append(",").append(x));
         long end=new GregorianCalendar().getTimeInMillis();
         System.out.println("(StringBuilder) Time Taken:"+(end-start));
@@ -86,7 +82,6 @@ public class BuilderBufferJoiner {
         System.gc();
         long start=new GregorianCalendar().getTimeInMillis();
         StringBuffer sb = new StringBuffer();
-        var tCount = new HashSet();
         IntStream.range(1,10000000).parallel().forEach(x -> sb.append(",").append(x));
         long end=new GregorianCalendar().getTimeInMillis();
         System.out.println("(StringBuffer) Time Taken:"+(end-start));
